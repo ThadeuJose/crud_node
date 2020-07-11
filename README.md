@@ -2,7 +2,7 @@
 Simplest CRUD using Node and SQLite
 
 # Next Step:
-	Fazer o setUp - Metodo que cria a única table
+	Read all quotes
 
 # TODO
 
@@ -13,7 +13,7 @@ Simplest CRUD using Node and SQLite
 
 	O server atualiza a frase embaixo
 
-  Create
+  Create X
   Read
   Update
   Delete
@@ -26,5 +26,7 @@ Simplest CRUD using Node and SQLite
 		https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6
 
 	Teste na interface
+
+# Source
 
 	https://www.sqlitetutorial.net/sqlite-nodejs/

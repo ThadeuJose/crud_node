@@ -16,8 +16,23 @@ app.use(express.static(__dirname + '/public'));
 
 let homeUrl = '/';
 
-app.post('/addPhrase', function (req, res) {
+app.get('/quote',function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify({ a: 1 }, null, 3));
+})
 
+app.post('/quote', function (req, res) {
+
+  console.log();
+  let quote = req.body.quote;
+  if(quote){
+    db.insertQuote(quote);
+    res.send('OK');
+  }else{
+    res.send('not OK');
+  }
+
+  console.log('POST');
 });
 
 app.listen(PORT);
