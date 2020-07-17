@@ -19,8 +19,30 @@ $(function () {
         $('#quotes').empty();
         for (var i of data) {
           console.log(i);
-          $('<div>').text(i.quote).appendTo($('#quotes'));
+          let btnDelete = $('<button>').text('Delete').click(deleteQuote);
+
+          $('<div>')
+              .text(i.quote)
+              .attr('id',i.id)
+              .append(btnDelete)
+              .appendTo($('#quotes'));
         }
     });
   }
+
+  function deleteQuote(e){
+    let id = e.target.parentElement.id
+    console.log(id);
+
+    $.ajax({
+        url: '/quote/'+id,
+        type: 'DELETE',
+        success: function(data) {
+            console.log(data);
+            pollQuotes();
+        }
+    });
+  }
+
+
 });

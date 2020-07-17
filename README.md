@@ -19,7 +19,7 @@ Delete
 
 - [ ] Update - Faz um show div com uma div com os dados
 
-- [ ] Delete
+- [x] Delete
 
 - [ ] CSS
 

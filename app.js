@@ -24,6 +24,12 @@ app.get('/allQuote',function (req, res) {
   });
 })
 
+app.delete('/quote/:id',function (req, res) {
+  let id = req.params.id;
+  db.deleteQuote(id);
+  res.json('Ok');
+})
+
 app.post('/quote', function (req, res) {
   let quote = req.body.quote;
   if(quote){

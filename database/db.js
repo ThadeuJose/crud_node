@@ -10,6 +10,15 @@ function connect(){
 
 }
 
+function disconnect(db) {
+	db.close((err) => {
+		if (err) {
+			console.error(err.message);
+		}
+		console.log('Closed database');
+	});
+}
+
 exports.setUpTable = function() {
 	const create_query = 'CREATE TABLE IF NOT EXISTS quote (id INTEGER PRIMARY KEY AUTOINCREMENT, quote TEXT NOT NULL)';
 	let db = connect();
@@ -26,7 +35,7 @@ exports.insertQuote = function(quote) {
 	 }
 	 console.log(`A row has been inserted with row id ${this.lastID}`);
  });
- db.close();
+ disconnect(db);
 };
 
 exports.readAllQuotes = function() {
@@ -43,13 +52,20 @@ exports.readAllQuotes = function() {
 		    resp.push(row);
 		  });
 			resolve(resp);
-			db.close((err) => {
-				if (err) {
-					console.error(err.message);
-				}
-				console.log('Closed database');
-			});
+			disconnect(db);
 		});
 	});
+};
 
+
+exports.deleteQuote = function(id) {
+	let db = connect();
+	const insert_query = 'DELETE FROM quote WHERE id=?';
+	db.run(insert_query, id, function(err) {
+	  if (err) {
+	    return console.log(err.message);
+	  }
+	  console.log(`Row(s) deleted ${this.changes}`);
+ });
+ disconnect(db);
 };
