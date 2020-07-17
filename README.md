@@ -9,15 +9,15 @@ O server atualiza a frase embaixo
 
 
 ## Next Step:
-Read all quotes
+Delete
 
 ## TODO
 
 - [x] Create
 
-- [ ] Read
+- [x] Read
 
-- [ ] Update
+- [ ] Update - Faz um show div com uma div com os dados
 
 - [ ] Delete
 

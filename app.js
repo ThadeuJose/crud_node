@@ -5,6 +5,7 @@ let app = express();
 let db = require('./database/db.js');
 
 let bodyParser = require('body-parser');
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -16,14 +17,14 @@ app.use(express.static(__dirname + '/public'));
 
 let homeUrl = '/';
 
-app.get('/quote',function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({ a: 1 }, null, 3));
+app.get('/allQuote',function (req, res) {
+  db.readAllQuotes().then((data) => {
+      console.log(data);
+      res.json(data);
+  });
 })
 
 app.post('/quote', function (req, res) {
-
-  console.log();
   let quote = req.body.quote;
   if(quote){
     db.insertQuote(quote);
@@ -31,7 +32,6 @@ app.post('/quote', function (req, res) {
   }else{
     res.send('not OK');
   }
-
   console.log('POST');
 });
 

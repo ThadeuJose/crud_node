@@ -18,16 +18,38 @@ exports.setUpTable = function() {
 };
 
 exports.insertQuote = function(quote) {
-	const insert_query = 'INSERT INTO quote (quote) VALUES(?)'
 	let db = connect();
+	const insert_query = 'INSERT INTO quote (quote) VALUES(?)';
 	db.run(insert_query, [ quote ], function(err) {
 	 if (err) {
-		 return console.log(err.message);
+		 console.log(err.message);
 	 }
-	 // get the last insert id
 	 console.log(`A row has been inserted with row id ${this.lastID}`);
  });
-
- // close the database connection
  db.close();
+};
+
+exports.readAllQuotes = function() {
+	let db = connect();
+	return new Promise(function(resolve, reject) {
+		const read_query = 'SELECT * FROM quote ORDER BY id';
+		db.all(read_query, [], (err, rows) => {
+			if (err) {
+				console.log(err.message);
+				reject(err);
+			}
+			let resp = [];
+		  rows.forEach((row) => {
+		    resp.push(row);
+		  });
+			resolve(resp);
+			db.close((err) => {
+				if (err) {
+					console.error(err.message);
+				}
+				console.log('Closed database');
+			});
+		});
+	});
+
 };
