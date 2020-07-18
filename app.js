@@ -24,6 +24,14 @@ app.get('/allQuote',function (req, res) {
   });
 })
 
+app.get('/quote/:id',function (req, res) {
+  let id = req.params.id;
+  db.readQuote(id).then((data) => {
+      console.log(data);
+      res.json(data);
+  });
+})
+
 app.delete('/quote/:id',function (req, res) {
   let id = req.params.id;
   db.deleteQuote(id);
@@ -39,6 +47,13 @@ app.post('/quote', function (req, res) {
     res.send('not OK');
   }
   console.log('POST');
+});
+
+app.put('/quote', function (req, res) {
+  let id = req.body.id;
+  let quote = req.body.quote;
+  db.updateQuote(id,quote);
+  res.send('Ok');
 });
 
 app.listen(PORT);

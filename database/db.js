@@ -57,15 +57,41 @@ exports.readAllQuotes = function() {
 	});
 };
 
+exports.readQuote = function(id) {
+	let db = connect();
+	return new Promise(function(resolve, reject) {
+		const read_query = 'SELECT * FROM quote WHERE id=?';
+		db.all(read_query, [id], (err, row) => {
+			if (err) {
+				console.log(err.message);
+				reject(err);
+			}
+			resolve(row[0]);
+			disconnect(db);
+		});
+	});
+};
 
 exports.deleteQuote = function(id) {
 	let db = connect();
-	const insert_query = 'DELETE FROM quote WHERE id=?';
-	db.run(insert_query, id, function(err) {
+	const delete_query = 'DELETE FROM quote WHERE id=?';
+	db.run(delete_query, id, function(err) {
 	  if (err) {
 	    return console.log(err.message);
 	  }
 	  console.log(`Row(s) deleted ${this.changes}`);
  });
  disconnect(db);
+};
+
+exports.updateQuote = function(id,newquote) {
+	let db = connect();
+	const update_query = 'UPDATE quote SET quote = ? WHERE id = ?';
+	db.run(update_query, [newquote,id], function(err) {
+	  if (err) {
+	    return console.log(err.message);
+	  }
+	  console.log(`Row(s) updated: ${this.changes}`);
+	});
+	disconnect(db);
 };

@@ -17,11 +17,11 @@ Delete
 
 - [x] Read
 
-- [ ] Update - Faz um show div com uma div com os dados
+- [x] Update
 
 - [x] Delete
 
-- [ ] CSS
+- [x] CSS
 
 ## Technical Debt
 
