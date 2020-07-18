@@ -9,7 +9,7 @@ O server atualiza a frase embaixo
 
 
 ## Next Step:
-Delete
+Pay Technical Debt
 
 ## TODO
 
